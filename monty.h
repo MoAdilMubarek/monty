@@ -37,4 +37,6 @@ void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 size_t print_list(stack_t *stack);
 int is_valid(const char *str);
+void print_top(stack_t *stack, int line);
+
 #endif

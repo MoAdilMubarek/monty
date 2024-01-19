@@ -52,6 +52,10 @@ int main(int argc, char *argv[])
 		{
 			print_list(stack);
 		}
+		else if (strcmp(token, "pint") == 0)
+		{
+			print_top(stack, line_tracker);
+		}
 		else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_tracker, token);
