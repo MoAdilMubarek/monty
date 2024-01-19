@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file <file\n");
+		fprintf(stderr, "Error: Can't open file %s\n", (char *)file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -39,7 +39,11 @@ int main(int argc, char *argv[])
 		token = strtok(buffer, " ");
 		if (strcmp(token, "push") == 0)
 		{
-			token = strtok(NULL, " ");
+			if ((token = strtok(NULL, " ")) == NULL)
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_tracker);
+				exit(EXIT_FAILURE);
+			}
 			value = *token;
 			push(&stack, line_tracker);
 		}
@@ -47,6 +51,11 @@ int main(int argc, char *argv[])
 		else if (strcmp(token, "pall") == 0)
 		{
 			print_list(stack);
+		}
+		else
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_tracker, token);
+			exit(EXIT_FAILURE);
 		}
 		line_tracker++;
 	}
